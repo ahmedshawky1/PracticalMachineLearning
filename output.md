@@ -86,13 +86,62 @@ mod_DT <- rpart(classe ~ ., data=training, method="class")
 fancyRpartPlot(mod_DT)
 ```
 
-![plot of chunk unnamed-chunk-31](figure/unnamed-chunk-31-1.png)
+![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.png)
 
 ```r
-Prediction <- predict(mod_DT, testingData_Quiz, type = "class")
+predictions <- predict(mod_DT, testing, type = "class")
+```
 
 
-Prediction
+
+###test the Results
+
+
+```r
+confusionMatrix(predictions, testing$classe)
+```
+
+```
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction    A    B    C    D    E
+##          A 1333   44    4    0    0
+##          B   36  786   44   35    0
+##          C   26  112  791  127   36
+##          D    0    7   16  612   98
+##          E    0    0    0   30  767
+## 
+## Overall Statistics
+##                                          
+##                Accuracy : 0.8746         
+##                  95% CI : (0.865, 0.8837)
+##     No Information Rate : 0.2845         
+##     P-Value [Acc > NIR] : < 2.2e-16      
+##                                          
+##                   Kappa : 0.8415         
+##  Mcnemar's Test P-Value : NA             
+## 
+## Statistics by Class:
+## 
+##                      Class: A Class: B Class: C Class: D Class: E
+## Sensitivity            0.9556   0.8282   0.9251   0.7612   0.8513
+## Specificity            0.9863   0.9709   0.9257   0.9705   0.9925
+## Pos Pred Value         0.9652   0.8724   0.7244   0.8349   0.9624
+## Neg Pred Value         0.9824   0.9593   0.9832   0.9540   0.9674
+## Prevalence             0.2845   0.1935   0.1743   0.1639   0.1837
+## Detection Rate         0.2718   0.1603   0.1613   0.1248   0.1564
+## Detection Prevalence   0.2816   0.1837   0.2227   0.1495   0.1625
+## Balanced Accuracy      0.9709   0.8996   0.9254   0.8658   0.9219
+```
+
+##$ to answer the Quiz
+
+```r
+Prediction_Quiz <- predict(mod_DT, testingData_Quiz, type = "class")
+
+
+Prediction_Quiz
 ```
 
 ```

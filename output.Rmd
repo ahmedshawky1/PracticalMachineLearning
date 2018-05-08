@@ -11,7 +11,7 @@ The goal of your project is to predict the manner in which they did the exercise
 
 
 ###Reading & Cleaning the Data
-```{r}
+```{r cache=TRUE}
 set.seed(1234)
 library(caret)
 library(rpart)
@@ -53,8 +53,28 @@ testing <- trainingData[-Train, ]
 ```{r}
 mod_DT <- rpart(classe ~ ., data=training, method="class")
 fancyRpartPlot(mod_DT)
-Prediction <- predict(mod_DT, testingData_Quiz, type = "class")
+
+predictions <- predict(mod_DT, testing, type = "class")
 
 
-Prediction
+
+```
+
+
+
+###test the Results
+
+```{r}
+
+confusionMatrix(predictions, testing$classe)
+
+```
+
+##$ to answer the Quiz
+```{r}
+
+Prediction_Quiz <- predict(mod_DT, testingData_Quiz, type = "class")
+
+
+Prediction_Quiz
 ```
